@@ -1,0 +1,48 @@
+Part 1 - Theory
+
+1. a) v = 1, r = 2, s = 2, w = 3, t = 3, x = 4, u = 3, y = 2
+
+   b)Breadth - First Search
+     Output: w, s, t, x, r, u, y, v
+     
+   c)Depth - First Search
+     Output: w, s, r, v, t, x, u, y
+     
+2. We must create a graph G where each vertex represents an actor and each edge represents a rivalry
+between the actors. The graph G will have k vertices (actors) and r edges. The algorithm needed
+to designate some actors as indie and some as mainstream is the breadth first search algorithm,
+where it must be performed until all nodes are touched by the algorithm and searched. First, we 
+need to disregarded all vertices with degree 0, as these have no rivalry and therefore are 
+disconnected. We can start the BFS algorithm by taking a mainstream actor to be the root without
+loss of generality (note this could be an indie actor at the root and the rest of the proof 
+would be inverted). We can save the path length from each node or vertex from the root. All
+vertices with odd lengths are indie actors (if the root was indie then all odd would be 
+mainstream). If the distance of a vertex is even, then the vertex is mainstream, or matches the 
+root. This makes sense as rivalries are only between indie actors and mainstream actors. One could
+think of the graph as a bulls-eye where the center root is red, and the one adjacent to it must 
+be white or in this case not the root actor type, and the distance of adjacent vertices is one
+(an odd number). If two are an even distance away, they have the same parity actor as the adjacent
+ to an adjacent must match (as the first adjacent must be different and the other one also). O(k)
+ time is needed to process each actor (with a total of k actors) and O(r) time is needed to process
+ each of the edges to find the path length, and add one from the previous node they were adjacent
+ to to get the updated distance. Finally, adding these run times gives us our O(k + r) runtime.
+ 
+ 4. Questions about the data
+   a) There is a distance of three between nodes 40 and 1050.
+   b) The graph is connected. I know this after running BFS, as after searching starting at a node
+      in the textfile, every other node in the textfile was visited without needing to jump to 
+      a different connected component. Therefore, all the nodes must be in one connected component,
+      in other words must be connected.
+   c) Starting from node 40, the max frontier is 7 (keeping in mind disconnected components are 
+      not counted as incrementing the frontier but are omitted from being counted for max).
+      Starting at node 150, the max frontier is 6, and starting at node 4, the max frontier is at 7
+      again. The answer does change depending on the node. This is because the starting nodes can
+      have different degrees of separation. In class, we saw the example with Kevin Bacon, it was 
+      easy for him to have a max frontier of 6 as he is well connected. However, if an actor is not
+      well known wants their degrees of separation, they will have to go through many actors, then 
+      possible to Kevin Bacon, then to other lesser known actors taking more time then a well 
+      connected actor or a super node would.
+   d) There are 3780 nodes within a distance of 4 from the node 1344, including itself and keeping
+      in mind that we start at node 0, therefore have a total of 4039.
+      
+   
